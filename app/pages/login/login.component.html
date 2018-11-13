@@ -1,0 +1,29 @@
+<ngx-spinner bdColor="rgba(51,51,51,0.8)" size="medium" color="#fff" type="ball-scale-multiple">
+ <p style="font-size: 20px; color: white">Chargement...</p>
+</ngx-spinner>
+ <div class="middle-box loginscreen animated fadeInDown">
+        <div>
+            <div>
+                <label class="error">{{errorMessage}}</label>
+            	<h4 class="logo-name" style="font-size:80px">FIN<span style="color: #1ab293;">CRM</span></h4>
+            </div>
+            <br>
+            <br>
+            <form class="m-t" role="form" [formGroup]="loginForm" >
+                <div class="form-group" [ngClass]="displayFieldCss('email')">
+                    <label class="control-label required" style="color: #FFF; font-size: 15px;">Adresse email <span class="reqir">*</span></label>
+                    <input type="text" class="form-control" placeholder="Adresse email" formControlName="email">
+                    <app-field-error-display [displayError]="isFieldValid('email')" errorMsg="Adresse email obligatoire ou Adresse email invalide">
+                    </app-field-error-display>
+                </div>
+                <div class="form-group" [ngClass]="displayFieldCss('password')">
+                    <label class="control-label required" style="color: #FFF; font-size: 15px;">Mot de passe <span class="reqir">*</span></label>
+                    <input type="password" class="form-control" placeholder="Mot de passe" formControlName="password">
+                    <app-field-error-display [displayError]="isFieldValid('password')" errorMsg="Mot de passe obligatoire">
+                    </app-field-error-display>
+
+                </div>
+                <button type="submit" (click)="loginSubmit(loginForm.value)" class="btn btn-primary block full-width m-b">Connexion</button>
+            </form>
+        </div>
+    </div>

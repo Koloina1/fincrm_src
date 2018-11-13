@@ -1,0 +1,221 @@
+<ngx-spinner bdColor="rgba(51,51,51,0.8)" size="medium" color="#fff" type="ball-scale-multiple">
+    <ng-flash-message></ng-flash-message>
+ <p style="font-size: 20px; color: white">Chargement...</p>
+</ngx-spinner>
+<app-sidebar></app-sidebar>
+    <div id="page-wrapper" class="gray-bg">
+        <app-header></app-header>
+        <div class="row wrapper border-bottom white-bg page-heading">
+            <div class="col-lg-10">
+                <h2 class="pull-left">Formulaire clientèle</h2>
+                <h2 class="pull-right left-arrow btn btn-default"><a routerLink="/dashboard"><i class="fa fa-arrow-left"></i> retour</a></h2>
+            </div>
+            <div class="col-lg-2">
+
+            </div>
+        </div>
+
+         <div class="wrapper wrapper-content  animated fadeInRight">
+            <div class="row" id="sortable-view">
+
+                <div class="col-lg-12" ngDraggable>
+                    <div class="ibox ">
+                        <div class="ibox-title">
+                            <h5>Formulaire</h5>
+                            <svg width="24px" fill="currentColor" viewBox="0 0 24 24" style="float: right;position: relative;top: -1px;left: 69px;color: #1ab394; cursor: move;">
+                              <path d="M10 9h4V6h3l-5-5-5 5h3v3zm-1 1H6V7l-5 5 5 5v-3h3v-4zm14 2l-5-5v3h-3v4h3v3l5-5zm-9 3h-4v3H7l5 5 5-5h-3v-3z"></path>
+                              <path d="M0 0h24v24H0z" fill="none"></path>
+                            </svg>
+                        </div>
+                        <div class="ibox-content">
+                            <h2>
+                                Information clientèle
+                            </h2>
+                            <form [formGroup]="form" class="form-register-infos">
+                                <aw-wizard>
+                                  <aw-wizard-step stepTitle="Information personnelle" >
+                                    <!--<div class="form-group">
+                                        <label class="control-label required">Client </label>
+                                        <input type="text" placeholder="002501285" class="form-control" id="clt_vcli" formControlName="clt_vcli">
+                                    </div>-->
+                                    <div class="form-group" [ngClass]="displayFieldCss('clt_vnom')">
+                                        <label class="control-label required">Nom <span class="reqir">*</span></label>
+                                        <input  type="text" placeholder="Votre nom" class="form-control" id="clt_vnom" formControlName="clt_vnom">
+                                        <app-field-error-display [displayError]="isFieldValid('clt_vnom')" errorMsg="Nom obligatoire">
+                                      </app-field-error-display>
+                                    </div>
+                                    <div class="form-group" [ngClass]="displayFieldCss('ind_vprenom')">
+                                        <label class="control-label required">Prénom <span class="reqir">*</span></label>
+                                        <input type="text" placeholder="Votre prénom" class="form-control" id="ind_vprenom" formControlName="ind_vprenom">
+                                        <app-field-error-display [displayError]="isFieldValid('ind_vprenom')" errorMsg="Prénom obligatoire">
+                                      </app-field-error-display>
+                                    </div>
+                                    <!--<div class="form-group">
+                                        <label>Surnom </label>
+                                        <input type="text" placeholder="Votre surnom" class="form-control" id="ind_vsurnom" formControlName="ind_vsurnom">
+                                    </div>-->
+                                    <div class="form-group">
+                                        <label class="control-label required">Date d'entrée</label>
+                                        <input  placeholder="Date d'entrée" [owlDateTimeTrigger]="dt1" [owlDateTime]="dt1" class="form-control" formControlName="clt_ddate_in">
+                                        <span [owlDateTimeTrigger]="dt1"><i class="fa fa-calendar"></i></span>
+                                        <owl-date-time [pickerType]="'calendar'" #dt1></owl-date-time>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label required">Genre</label>
+                                        <select class="form-control" id="ind_vgenre" formControlName="ind_vgenre">
+                                            <option value="feminin">Feminin</option>
+                                            <option value="masculin">Masculin</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group" [ngClass]="displayFieldCss('ind_dnais')">
+                                        <label class="control-label required">Date de naissance <span class="reqir">*</span></label>
+                                        <input  placeholder="Date de naissance" class="form-control" id="ind_dnais" formControlName="ind_dnais" [owlDateTimeTrigger]="ind_dnais" [owlDateTime]="ind_dnais">
+                                        <span [owlDateTimeTrigger]="ind_dnais"><i class="fa fa-calendar"></i></span>
+                                        <owl-date-time [pickerType]="'calendar'" #ind_dnais></owl-date-time>
+                                        <app-field-error-display [displayError]="isFieldValid('ind_dnais')" errorMsg="Date de naissance obligatoire">
+                                      </app-field-error-display>
+                                    </div>
+                                    <div class="form-group" [ngClass]="displayFieldCss('ind_inais')">
+                                        <label class="control-label required">Vers <span class="reqir">*</span></label>
+                                        <input [(ngModel)]="vers" disabled type="text" placeholder="Vers" class="form-control" id="ind_inais" formControlName="ind_inais">
+                                        <app-field-error-display [displayError]="isFieldValid('ind_inais')" errorMsg="Vers obligatoire">
+                                      </app-field-error-display>
+                                    </div>
+                                    <div class="form-group" [ngClass]="displayFieldCss('ind_vnais')">
+                                        <label class="control-label required">Lieu de naissance <span class="reqir">*</span></label>
+                                        <input type="text" placeholder="Lieu de naissance" class="form-control" id="ind_vnais" formControlName="ind_vnais">
+                                        <app-field-error-display [displayError]="isFieldValid('ind_vnais')" errorMsg="Lieu de naissance obligatoire">
+                                      </app-field-error-display>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label required">Sit. familiale </label>
+                                        <select class="form-control" id="ind_vsitfam" formControlName="ind_vsitfam">
+                                            <option value="célibataire">Célibataire</option>
+                                            <option value="Concubin(e)">Concubin(e)</option>
+                                            <option value="divorcé(e)">divorcé(e)</option>
+                                            <option value="marié(e)">marié(e)</option>
+                                            <option value="veuf(ve)">veuf(ve)</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label required">Pays de Nationalité</label>
+                                        <select class="form-control" id="clt_vpays" formControlName="clt_vpays">
+                                            <option value="mg" selected="selected">Madagascar</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group" [ngClass]="displayFieldCss('ind_vcin')">
+                                        <label class="control-label required">Numéro CIN <span class="reqir">*</span></label>
+                                        <input disabled [(ngModel)]="cin" type="text" placeholder="Numéro CIN" class="form-control" id="ind_vcin" formControlName="ind_vcin">
+                                        <app-field-error-display [displayError]="isFieldValid('ind_vcin')" errorMsg="Numéro CIN obligatoire">
+                                      </app-field-error-display>
+                                    </div>
+                                    <br>
+                                    <button type="button"  class="btn btn-primary"  [awGoToStep]="{ stepIndex: step  }" (finalize)="finalizeStep()">Suivant</button>
+                                    
+                                  </aw-wizard-step>
+
+
+                                  <aw-wizard-step stepTitle="Information Supplémentaire">
+
+                                    <div class="form-group" [ngClass]="displayFieldCss('ind_dcin')">
+                                        <label class="control-label required">Date de délivrance <span class="reqir">*</span></label>
+                                        <input placeholder="Date de délivrance" class="form-control" id="ind_dcin" formControlName="ind_dcin" [owlDateTimeTrigger]="ind_dcin" [owlDateTime]="ind_dcin">
+                                        <span [owlDateTimeTrigger]="ind_dcin"><i class="fa fa-calendar"></i></span>
+                                        <owl-date-time [pickerType]="'calendar'" #ind_dcin></owl-date-time>
+                                        <app-field-error-display [displayError]="isFieldValid('ind_dcin')" errorMsg="Date de délivrance obligatoire">
+                                      </app-field-error-display>
+                                    </div>
+                                    <div class="form-group" [ngClass]="displayFieldCss('ind_vlcin')">
+                                        <label class="control-label required">Lieu de délivrance <span class="reqir">*</span></label>
+                                        <input type="text" placeholder="Lieu de délivrance" class="form-control" id="ind_vlcin" formControlName="ind_vlcin">
+                                        <app-field-error-display [displayError]="isFieldValid('ind_vlcin')" errorMsg="Lieu de délivrance obligatoire">
+                                      </app-field-error-display>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Date duplicata</label>
+                                        <input placeholder="Date duplicata" class="form-control" id="ind_ddcin" formControlName="ind_ddcin" [owlDateTimeTrigger]="ind_ddcin" [owlDateTime]="ind_ddcin">
+                                        <span [owlDateTimeTrigger]="ind_ddcin"><i class="fa fa-calendar"></i></span>
+                                        <owl-date-time [pickerType]="'calendar'" #ind_ddcin></owl-date-time>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Lieu de duplicata</label>
+                                        <input type="text" placeholder="Lieu de duplicata" class="form-control" id="ind_vlieudupli" formControlName="ind_vlieudupli">
+                                    </div>
+                                    <br>
+                                    <button type="button" awPreviousStep class="btn btn-default" style="margin-right:9px;">Précédent</button>
+                                    <button type="button" class="btn btn-primary" (click)="finishFunction()">Envoyer</button>
+                                    <div toastContainer></div>
+                                    <!--<button type="button" awPreviousStep class="btn btn-default" style="margin-right:9px;">Précédent</button>
+                                    <button type="button" awNextStep class="btn btn-primary">Suivant</button>-->
+                                  </aw-wizard-step>
+
+
+                                  <!--<aw-wizard-step stepTitle="Résidence">
+                                    <div class="form-group" [ngClass]="displayFieldCss('clt_vcodeper')">
+                                        <label class="control-label required">Gestionnaire de compte <span class="reqir">*</span></label>
+                                        <input type="text" placeholder="Gestionnaire de compte" class="form-control" id="clt_vcodeper" formControlName="clt_vcodeper">
+                                        <app-field-error-display [displayError]="isFieldValid('clt_vcodeper')" errorMsg="Gestionnaire de compte obligatoire">
+                                      </app-field-error-display>
+                                    </div>
+                                    <div class="form-group" [ngClass]="displayFieldCss('clt_vcodeact')">
+                                        <label class="control-label required">Activités principale <span class="reqir">*</span></label>
+                                        <input type="text" placeholder="Activités principale" class="form-control" id="clt_vcodeact" formControlName="clt_vcodeact">
+                                        <app-field-error-display [displayError]="isFieldValid('clt_vcodeact')" errorMsg="Activités principale">
+                                      </app-field-error-display>
+                                    </div>
+                                    <div class="form-group" [ngClass]="displayFieldCss('ind_vcodeprof')">
+                                        <label class="control-label required">Ressources Profession <span class="reqir">*</span></label>
+                                        <input type="text" placeholder="Ressources Profession" class="form-control" id="ind_vcodeprof" formControlName="ind_vcodeprof">
+                                        <app-field-error-display [displayError]="isFieldValid('ind_vcodeprof')" errorMsg="Ressources Profession obligatoire">
+                                      </app-field-error-display>
+                                    </div>
+                                    <br>
+                                    <button type="button" awPreviousStep class="btn btn-default" style="margin-right:9px;">Précédent</button>
+                                    <button type="button" class="btn btn-primary" (click)="finishFunction()">Envoyer</button>
+                                  </aw-wizard-step>-->
+                                </aw-wizard>
+                            </form>
+                        </div>
+                    </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="ibox " ngDraggable>
+                            <div class="ibox-title">
+                                <h5>CIN</h5>
+                                <svg width="24px" fill="currentColor" viewBox="0 0 24 24" style="float: right;position: relative;top: -1px;left: 69px;color: #1ab394; cursor: move;">
+                                  <path d="M10 9h4V6h3l-5-5-5 5h3v3zm-1 1H6V7l-5 5 5 5v-3h3v-4zm14 2l-5-5v3h-3v4h3v3l5-5zm-9 3h-4v3H7l5 5 5-5h-3v-3z"></path>
+                                  <path d="M0 0h24v24H0z" fill="none"></path>
+                                </svg>
+                            </div>
+                            <div class="ibox-content">
+                                <h2>
+                                    CIN Recto & Verso
+                                </h2>
+                                <img [src]="both" *ngIf="both" style="width: 100%">
+                            </div>
+                            <div class="ibox-content">
+                                <img [src]="sides" *ngIf="sides" style="width: 100%">
+                            </div>
+                        </div>
+                    </div>
+                <div class="col-lg-6">
+                    <div class="ibox" ngDraggable>
+                        <div class="ibox-title">
+                            <h5>Résidence</h5>
+                            <svg width="24px" fill="currentColor" viewBox="0 0 24 24" style="float: right;position: relative;top: -1px;left: 69px;color: #1ab394; cursor: move;">
+                              <path d="M10 9h4V6h3l-5-5-5 5h3v3zm-1 1H6V7l-5 5 5 5v-3h3v-4zm14 2l-5-5v3h-3v4h3v3l5-5zm-9 3h-4v3H7l5 5 5-5h-3v-3z"></path>
+                              <path d="M0 0h24v24H0z" fill="none"></path>
+                            </svg>
+                        </div>
+                        <div class="ibox-content">
+                            <h2>
+                                Photo du certificat de résidence
+                            </h2>
+                            <img [src]="residence" *ngIf="residence" style="width: 100%">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+<app-footer></app-footer>
+    </div>

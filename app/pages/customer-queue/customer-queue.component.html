@@ -1,0 +1,68 @@
+<ngx-spinner bdColor="rgba(51,51,51,0.8)" size="medium" color="#fff" type="ball-scale-multiple">
+ <p style="font-size: 20px; color: white">Chargement...</p>
+</ngx-spinner>
+<app-sidebar></app-sidebar>
+        <div id="page-wrapper" class="gray-bg">
+            <app-header></app-header>
+            <div class="row wrapper border-bottom white-bg page-heading">
+                <div class="col-lg-10">
+                    <h2>Liste clientèle</h2>
+                </div>
+                <div class="col-lg-2">
+
+                </div>
+            </div>
+        <div class="wrapper wrapper-content  animated fadeInRight">
+                <div class="ibox-content">
+                    <div  class="mat-elevation-z8">
+                    <table mat-table [dataSource]="dataSource" matSort width="100%">
+                      <ng-container matColumnDef="phone">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 20%"> Phone </th>
+                        <td mat-cell *matCellDef="let element"> {{element.key}} </td>
+                      </ng-container>
+
+                       <ng-container matColumnDef="cin">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 20%"> CIN </th>
+                        <td mat-cell *matCellDef="let element"> {{element.cin}} </td>
+                      </ng-container>
+
+                      <ng-container matColumnDef="both">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Recto </th>
+                        <td mat-cell *matCellDef="let element" >
+                            <img [src]="element.pict?.both" class="imgs_customer" *ngIf="element.pict?.both" style="width: 50%;">
+                        </td>
+                      </ng-container>
+                      <ng-container matColumnDef="sides">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Verso </th>
+                        <td mat-cell *matCellDef="let element">
+                            <img [src]="element.pict?.sides" *ngIf="element.pict?.sides" class="imgs_customer" style="width: 50%;">
+                        </td>
+                      </ng-container>
+                      <ng-container matColumnDef="residence">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Residence </th>
+                        <td mat-cell *matCellDef="let element"> 
+                            <img [src]="element.pict?.residence" *ngIf="element.pict?.residence"  class="imgs_customer" style="width: 50%;">
+                        </td>
+                      </ng-container> 
+                      <ng-container matColumnDef="iban">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> iban </th>
+                        <td mat-cell *matCellDef="let element"> 
+                             {{element.iban}}
+                        </td>
+                      </ng-container>
+                      <ng-container matColumnDef="action">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>
+                        <td mat-cell *matCellDef="let element"> 
+                            <a (click)='validateCustomer(element.key.split(" ").join(""))' class="btn btn-primary" title="view"><i class="fa fa-eye"></i></a>
+                        </td>
+                      </ng-container>
+                      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                    </table>
+                    <mat-paginator [pageSizeOptions]="[100, 200, 300]" showFirstLastButtons></mat-paginator>
+                    </div>
+                </div>
+            </div>
+        <app-footer></app-footer>
+
+        </div>

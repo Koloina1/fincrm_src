@@ -1,0 +1,6 @@
+projectKey=allurkey
+serverUrl=http://118339hd053044.ikexpress.com:6090
+serverVersion=7.1.0.11001
+dashboardUrl=http://118339hd053044.ikexpress.com:6090/dashboard/index/allurkey
+ceTaskId=AWcGom3krNlGh2gS6ksU
+ceTaskUrl=http://118339hd053044.ikexpress.com:6090/api/ce/task?id=AWcGom3krNlGh2gS6ksU
